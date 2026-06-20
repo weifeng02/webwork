@@ -1,0 +1,234 @@
+/* ============================================================
+   校园失物招领系统 - 全局样式表 (style.css)
+   使用 CSS 自定义属性（变量）定义设计系统，确保全局一致
+   包含导航栏、按钮、卡片、表格、表单、详情页、响应式布局等组件
+   ============================================================ */
+
+/* ============================================================
+   1. 设计系统变量（CSS 自定义属性）
+   定义全局颜色、间距、阴影等变量，方便统一管理和调整
+   ============================================================ */
+:root {
+    /* 主色：蓝色系，用于主要按钮和链接 */
+    --primary: #1a73e8;
+    --primary-dark: #1557b0;
+    /* 辅色：绿色系，用于成功状态 */
+    --secondary: #34a853;
+    /* 强调色：橙色系，用于警告/提示 */
+    --accent: #fbbc04;
+    /* 危险色：红色系，用于错误/删除操作 */
+    --danger: #ea4335;
+    /* 背景色：浅灰色 */
+    --bg: #f8fafc;
+    /* 表面色：白色，用于卡片、面板 */
+    --surface: #ffffff;
+    /* 文字色：深灰色 */
+    --text: #1e293b;
+    /* 次要文字色：浅灰色 */
+    --text-muted: #64748b;
+    /* 边框色：浅灰 */
+    --border: #e2e8f0;
+    /* 阴影：小阴影用于卡片 */
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    /* 阴影：大阴影用于悬浮效果 */
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+    /* 圆角半径：8px */
+    --radius: 8px;
+}
+
+/* 全局重置：移除浏览器默认边距和填充 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* 基础页面样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); /* 使用 CSS 变量设置背景 */
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ============================================================
+   2. 导航栏组件
+   顶部固定导航栏，包含品牌 Logo、导航链接、用户信息区域
+   ============================================================ */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 64px;
+    position: sticky; /* 粘性定位：滚动时保持顶部固定 */
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+/* 品牌 Logo 区域 */
+.nav-brand a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); font-weight: 700; font-size: 1.1rem; }
+.logo { width: 36px; height: 36px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+/* 导航链接列表 */
+.nav-links { display: flex; list-style: none; gap: 28px; }
+.nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+.nav-links a:hover { color: var(--primary); }
+
+/* 用户信息区域 */
+.nav-user { display: flex; align-items: center; gap: 16px; }
+
+/* ============================================================
+   3. 按钮组件
+   统一按钮样式：主按钮、次要按钮、危险按钮、成功按钮、登录/注册/退出按钮
+   ============================================================ */
+.btn-login, .btn-register, .btn-logout, .btn-primary, .btn-secondary, .btn-danger, .btn-success {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 20px; border-radius: var(--radius); font-weight: 500;
+    text-decoration: none; cursor: pointer; border: none; font-size: 0.95rem;
+    transition: all 0.2s;
+}
+/* 主按钮：蓝色背景，用于主要操作 */
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+/* 次要按钮：白色背景带边框 */
+.btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+/* 危险按钮：红色背景，用于删除操作 */
+.btn-danger { background: var(--danger); color: #fff; }
+/* 成功按钮：绿色背景，用于确认操作 */
+.btn-success { background: var(--secondary); color: #fff; }
+/* 登录按钮 */
+.btn-login { background: var(--primary); color: #fff; }
+/* 注册按钮：蓝色边框 */
+.btn-register { background: var(--surface); color: var(--primary); border: 1px solid var(--primary); }
+/* 退出按钮：边框样式 */
+.btn-logout { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* 主内容区域：限制最大宽度，自动居中 */
+.main-content { max-width: 1200px; margin: 0 auto; padding: 32px; min-height: calc(100vh - 120px); }
+
+/* 页脚区域：底部居中显示 */
+.footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+/* ============================================================
+   4. 认证表单样式（登录/注册）
+   居中显示的卡片式表单容器
+   ============================================================ */
+.auth-container { max-width: 420px; margin: 80px auto; background: var(--surface); border-radius: 16px; padding: 40px; box-shadow: var(--shadow-lg); }
+.auth-container h2 { text-align: center; margin-bottom: 28px; font-size: 1.6rem; }
+
+/* 表单字段组 */
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.9rem; }
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+    border-radius: var(--radius); font-size: 1rem; transition: border-color 0.2s;
+}
+/* 输入框聚焦效果：蓝色边框 */
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none; border-color: var(--primary);
+}
+.form-group textarea { min-height: 100px; resize: vertical; }
+/* 错误提示样式 */
+.error { color: var(--danger); font-size: 0.85rem; margin-bottom: 12px; }
+
+/* ============================================================
+   5. 仪表盘样式
+   首页布局：头部区域 + 卡片网格
+   ============================================================ */
+.dashboard-header { margin-bottom: 32px; }
+.dashboard-header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.dashboard-header p { color: var(--text-muted); }
+
+.section { margin-bottom: 40px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.section-header h2 { font-size: 1.25rem; }
+
+/* ============================================================
+   6. 卡片网格组件
+   使用 CSS Grid 自动响应式布局，最小 280px 列宽
+   ============================================================ */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+/* 卡片样式：带边框、悬浮效果 */
+.card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; transition: box-shadow 0.2s, transform 0.2s;
+}
+/* 卡片悬浮效果：上移 2px + 阴影增强 */
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+/* 卡片图片：统一高度，自适应裁剪 */
+.card-img { width: 100%; height: 180px; object-fit: cover; background: var(--bg); }
+/* 无图片时的占位区域 */
+.card-img-placeholder { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; background: var(--bg); color: var(--text-muted); }
+.card-body { padding: 16px; }
+.card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+.card-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px; }
+
+/* 状态标签：小圆角胶囊样式 */
+.card-status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; margin-top: 8px; }
+/* 各状态颜色 */
+.status-pending { background: #fff3e0; color: #e65100; }      /* 待处理：橙色 */
+.status-matched { background: #e3f2fd; color: #1565c0; }      /* 已匹配：蓝色 */
+.status-found { background: #e8f5e9; color: #2e7d32; }          /* 已找回：绿色 */
+.status-returned { background: #e3f2fd; color: #1565c0; }         /* 已归还：蓝色 */
+.status-approved { background: #e8f5e9; color: #2e7d32; }       /* 已通过：绿色 */
+.status-rejected { background: #ffebee; color: #c62828; }         /* 已拒绝：红色 */
+
+/* 卡片操作按钮区域 */
+.card-actions { display: flex; gap: 8px; margin-top: 12px; }
+.card-actions a { font-size: 0.85rem; text-decoration: none; }
+
+/* ============================================================
+   7. 表格组件
+   数据表格：认领申请列表等场景使用
+   ============================================================ */
+.data-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+/* 表头样式：浅灰背景，大写文字 */
+.data-table th { background: var(--bg); font-weight: 600; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+/* 行悬浮效果 */
+.data-table tr:hover { background: var(--bg); }
+
+/* ============================================================
+   8. 筛选栏组件
+   列表页的筛选条件区域：类别下拉、地点输入、状态下拉
+   ============================================================ */
+.filter-bar { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+.filter-bar input, .filter-bar select { padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.95rem; }
+
+/* ============================================================
+   9. 搜索栏组件
+   搜索页面：输入框 + 类型选择 + 搜索按钮
+   ============================================================ */
+.search-bar { display: flex; gap: 12px; margin-bottom: 28px; max-width: 600px; }
+.search-bar input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; }
+.search-bar button { padding: 12px 24px; }
+
+/* ============================================================
+   10. 详情页组件
+   失物/招领详情页：头部 + 图片 + 元数据网格 + 操作按钮
+   ============================================================ */
+.detail-header { margin-bottom: 24px; }
+.detail-header h1 { font-size: 1.6rem; margin-bottom: 8px; }
+.detail-img { width: 100%; max-width: 480px; border-radius: var(--radius); margin-bottom: 24px; }
+/* 元数据网格：自适应列宽 */
+.detail-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.detail-meta-item { background: var(--surface); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); }
+.detail-meta-item label { display: block; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+.detail-meta-item span { font-weight: 600; }
+
+/* ============================================================
+   11. 响应式布局
+   移动端适配：平板和手机上的样式调整
+   ============================================================ */
+@media (max-width: 768px) {
+    /* 导航栏：允许换行，自动高度 */
+    .navbar { flex-wrap: wrap; height: auto; padding: 12px; }
+    .nav-links { gap: 12px; flex-wrap: wrap; }
+    /* 内容区域：减小内边距 */
+    .main-content { padding: 16px; }
+    /* 卡片：单列布局 */
+    .card-grid { grid-template-columns: 1fr; }
+    /* 筛选栏：垂直堆叠 */
+    .filter-bar { flex-direction: column; }
+}
