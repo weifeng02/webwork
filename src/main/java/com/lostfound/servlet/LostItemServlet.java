@@ -4,10 +4,10 @@ import com.lostfound.dao.LostItemDao;
 import com.lostfound.model.LostItem;
 import com.lostfound.model.User;
 import com.lostfound.util.XssFilter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 
 import java.io.IOException;
 import java.io.File;

@@ -3,9 +3,9 @@ package com.lostfound.servlet;
 import com.lostfound.dao.UserDao;
 import com.lostfound.model.User;
 import com.lostfound.util.XssFilter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 
 import java.io.IOException;
 import java.time.Instant;

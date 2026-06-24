@@ -1,13 +1,14 @@
 # 校园失物招领系统
 
 基于 Java + Servlet + JSP + MySQL + Apache Lucene 的校园失物招领系统。
-无需 Maven，直接下载 JAR 包放入 Tomcat 即可运行。
+无需 Maven，纯 Tomcat 9 部署，只需下载 JAR 包放入即可运行。
 
 ## 技术栈
 
 - Java 17
-- Jakarta Servlet 6.0 + JSP
-- Tomcat 10 (或 11)
+- Java EE 8 (javax.servlet) — 兼容 Tomcat 9
+- JSP + JSTL 1.2
+- Tomcat 9
 - MySQL 8.0
 - Apache Lucene 9.9 (全文检索)
 - Apache Commons FileUpload (文件上传)
@@ -24,39 +25,27 @@
 
 ## 数据库表
 
-- `users` - 用户表
-- `lost_items` - 失物表
-- `found_items` - 招领表
-- `claim_requests` - 认领申请表
+- `users` — 用户表
+- `lost_items` — 失物表
+- `found_items` — 招领表
+- `claim_requests` — 认领申请表
 
-## 运行方式（纯 Tomcat，无需 Maven）
+## 运行方式（纯 Tomcat 9，无需 Maven）
 
 ### 第一步：安装软件
 
 1. 安装 Java 17 (JDK)
 2. 安装 MySQL 8.0
-3. 安装 Tomcat 10 或 Tomcat 11
+3. 安装 Tomcat 9（注意：Tomcat 9，不是 Tomcat 10）
 
 ### 第二步：下载依赖 JAR
 
-打开 `lib/jar-dependencies.txt`，按照文件中的 URL 下载所有 JAR 包。
+打开 `lib/jar-dependencies.txt`，按照文件中的 URL 下载 **10 个 JAR 包**。
 
-下载后，将以下 12 个 JAR 文件放入 `src/main/webapp/WEB-INF/lib/` 目录下：
+下载后，将所有 JAR 文件放入 `src/main/webapp/WEB-INF/lib/` 目录下。
 
-```
-mysql-connector-j-8.3.0.jar
-jakarta.servlet-api-6.0.0.jar
-jakarta.servlet.jsp-api-3.1.1.jar
-jakarta.servlet.jsp.jstl-3.0.1.jar
-lucene-core-9.9.0.jar
-lucene-queryparser-9.9.0.jar
-lucene-analysis-common-9.9.0.jar
-lucene-highlighter-9.9.0.jar
-commons-fileupload-1.5.jar
-commons-io-2.15.1.jar
-encoder-1.2.3.jar
-encoder-jsp-1.2.3.jar
-```
+> **重要提示**：Tomcat 9 自带 Servlet 和 JSP API，不需要放入 lib。
+> 只需要下载 MySQL 驱动、JSTL 1.2、Lucene、Commons 和 OWASP 的 JAR 即可。
 
 ### 第三步：创建数据库
 
@@ -84,48 +73,48 @@ db.password=你的密码
 
 打开命令行，进入项目根目录（`campus-lost-found`），执行以下命令：
 
-```bash
-# Windows 命令
+**Windows：**
+```cmd
 javac -d src/main/webapp/WEB-INF/classes -cp "src/main/webapp/WEB-INF/lib/*" src/main/java/com/lostfound/model/*.java src/main/java/com/lostfound/dao/*.java src/main/java/com/lostfound/servlet/*.java src/main/java/com/lostfound/filter/*.java src/main/java/com/lostfound/util/*.java
 
-# 同时复制资源文件到 classes 目录
 xcopy src\main\resources\* src\main\webapp\WEB-INF\classes\ /s /i
+```
 
-# Linux / Mac 命令
+**Linux / Mac：**
+```bash
 javac -d src/main/webapp/WEB-INF/classes -cp "src/main/webapp/WEB-INF/lib/*" src/main/java/com/lostfound/model/*.java src/main/java/com/lostfound/dao/*.java src/main/java/com/lostfound/servlet/*.java src/main/java/com/lostfound/filter/*.java src/main/java/com/lostfound/util/*.java
 
-# 复制资源文件
 cp -r src/main/resources/* src/main/webapp/WEB-INF/classes/
 ```
 
 如果编译成功，你会看到 `src/main/webapp/WEB-INF/classes/` 目录下生成了 `.class` 文件。
 
-### 第六步：部署到 Tomcat
+### 第六步：部署到 Tomcat 9
 
-1. 找到 Tomcat 安装目录（如 `C:\apache-tomcat-10.1.28`）
+1. 找到 Tomcat 9 安装目录（如 `C:\apache-tomcat-9.0.86`）
 2. 进入 `webapps/` 目录
-3. 将项目文件夹重命名为 `lostfound`，复制到 `webapps/lostfound/`
-4. 最终 Tomcat 目录结构如下：
+3. 将项目文件夹复制到 `webapps/lostfound/`（文件夹名可任意）
+4. 最终 Tomcat 9 目录结构如下：
 
 ```
-apache-tomcat-10.1.28/
+apache-tomcat-9.0.86/
 ├── webapps/
 │   └── lostfound/                     ← 你的项目
 │       ├── WEB-INF/
 │       │   ├── web.xml
 │       │   ├── jsp/                   ← JSP 页面
-│       │   ├── lib/                   ← 12 个 JAR 包
+│       │   ├── lib/                   ← 10 个 JAR 包
 │       │   ├── classes/               ← 编译后的 .class 文件
 │       │   └── uploads/               ← 上传图片存储目录
 │       └── css/style.css
 ```
 
-### 第七步：启动 Tomcat
+### 第七步：启动 Tomcat 9
 
-1. 进入 Tomcat 的 `bin/` 目录
-2. 启动 Tomcat：
-   - Windows: 双击 `startup.bat`
-   - Linux/Mac: 运行 `./startup.sh`
+1. 进入 Tomcat 9 的 `bin/` 目录
+2. 启动 Tomcat 9：
+   - Windows：双击 `startup.bat`
+   - Linux/Mac：运行 `./startup.sh`
 3. 打开浏览器，访问 `http://localhost:8080/lostfound/login`
 
 ### 首次登录
@@ -135,11 +124,21 @@ apache-tomcat-10.1.28/
 
 ## 默认页面
 
-- `/login` - 登录
-- `/register` - 注册
-- `/dashboard` - 首页仪表盘
-- `/lost/list` - 失物列表
-- `/found/list` - 招领列表
-- `/search` - 搜索
-- `/match` - 智能匹配
-- `/claim/list` - 认领申请
+- `/login` — 登录
+- `/register` — 注册
+- `/dashboard` — 首页仪表盘
+- `/lost/list` — 失物列表
+- `/found/list` — 招领列表
+- `/search` — 搜索
+- `/match` — 智能匹配
+- `/claim/list` — 认领申请
+
+## Tomcat 9 vs Tomcat 10 说明
+
+| | Tomcat 9 | Tomcat 10 |
+|---|---|---|
+| 包名 | `javax.servlet` | `jakarta.servlet` |
+| 规范 | Java EE 8 | Jakarta EE 9+ |
+| 本项目 | ✅ 已兼容 | ❌ 不兼容 |
+
+本项目已全面使用 `javax.servlet` 包名，确保与 Tomcat 9 完全兼容。
